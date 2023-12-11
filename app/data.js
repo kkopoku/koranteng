@@ -1,7 +1,7 @@
 const stuffBuilt = [
   {
     display: "normal",
-    type: "Featured Project",
+    type: "Personal Project",
     title: "Enterprise Resource Planning System",
     description: "Enterprise Resource Planning System tailored for SMEs with features such as Finance, Inventory, Human Resource Management and Third-Party Integration to consume Inventory.",
     stacks: ["NextJS", "NodeJS", "MongoDB", "Git"],
@@ -11,7 +11,7 @@ const stuffBuilt = [
   },
   {
     display: "inverted",
-    type: "Featured Project",
+    type: "Personal Project",
     title: "Enterprise Resource Planning System",
     description: "Enterprise Resource Planning System tailored for SMEs with features such as Finance, Inventory, Human Resource Management and Third-Party Integration to consume Inventory.",
     stacks: ["NextJS", "NodeJS", "MongoDB", "Git"],

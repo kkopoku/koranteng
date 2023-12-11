@@ -1,11 +1,23 @@
 "use client";
 import TopNavigation from "@/components/TopNavigation";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
 
 export default function Home() {
+  const scrollToSection = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const aboutRef = useRef(null);
+  const experienceRef = useRef(null);
+  const workRef = useRef(null);
+  const contactRef = useRef(null);
+
   const { jobs, stuffBuilt } = { ...data };
+
   const [selectedJob, setSelectedJob] = useState(jobs[0]);
   function selectJob(job) {
     if (job == 0) setSelectedJob(jobs[0]);
@@ -65,9 +77,22 @@ export default function Home() {
     );
   };
 
+  function navigateComponents() {
+    console.log("HIiiiii");
+    if (window.location.hash === "#About") {
+      scrollToSection(aboutRef);
+    } else if (window.location.hash === "#Experience") {
+      scrollToSection(experienceRef);
+    } else if (window.location.hash === "#Work") {
+      scrollToSection(workRef);
+    } else if (window.location.hash === "#Contact") {
+      scrollToSection(contactRef);
+    }
+  }
+
   return (
     <div className="bg-black min-h-screen h-full text-white transition-all">
-      <TopNavigation />
+      <TopNavigation navigate={navigateComponents} />
 
       {/* Scaffolding Div */}
       <div className="flex flex-col lg:px-40 px-20 py-44 gap-32">
@@ -82,7 +107,7 @@ export default function Home() {
         </div>
 
         {/* About Me */}
-        <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
+        <div ref={aboutRef} className="grid lg:grid-cols-3 grid-cols-1 gap-10">
           <div className="col-span-2 flex flex-col gap-4">
             <p className="text-2xl text-slate-300 font-semibold">
               01. About Me
@@ -121,7 +146,10 @@ export default function Home() {
         </div>
 
         {/* Where Ive Worked */}
-        <div className="flex flex-row-reverse lg:pr-24 gap-10">
+        <div
+          ref={experienceRef}
+          className="flex flex-row-reverse lg:pr-24 gap-10"
+        >
           <div className="flex-col w-3/4">
             <p className="text-2xl text-slate-300 font-semibold pb-2">
               02. Where I've Worked
@@ -174,13 +202,31 @@ export default function Home() {
         </div>
 
         {/* Some Things I've built */}
-        <div className="flex flex-col lg:pr-20 gap-5">
+        <div ref={workRef} className="flex flex-col lg:pr-20 gap-5">
           <div className="flex flex-row text-2xl text-slate-300 font-semibold">
             03. Some Things I've Built
           </div>
           {stuffBuilt.map((instance) => (
             <StuffBuiltComponent record={instance} key={instance.image_url} />
           ))}
+        </div>
+
+        {/* Contact Me */}
+        <div
+          ref={contactRef}
+          className="flex flex-col items-center text-center text-slate-200 gap-5"
+        >
+          <p className="font-light">04. What's Next?</p>
+          <p className="font-semibold text-5xl">Get In Touch</p>
+          <p>
+            My inbox is always open. Whether you have a question or just want to
+            create <br /> your next idea together!
+          </p>
+          <a href={`mailto:kk.opoku@outlook.com`}>
+            <button className="py-4 px-10 border-2 rounded hover:scale-110 hover:text-black hover:bg-white transition-all ">
+              Say Hello
+            </button>
+          </a>
         </div>
       </div>
     </div>
