@@ -1,10 +1,26 @@
 "use client";
 import TopNavigation from "@/components/TopNavigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
 
 export default function Home() {
+  async function navigateComponents() {
+    if (window.location.hash === "#About") {
+      scrollToSection(aboutRef);
+    } else if (window.location.hash === "#Experience") {
+      scrollToSection(experienceRef);
+    } else if (window.location.hash === "#Work") {
+      scrollToSection(workRef);
+    } else if (window.location.hash === "#Contact") {
+      scrollToSection(contactRef);
+    }
+  }
+
+  useEffect(() => {
+    navigateComponents();
+  }, []);
+
   const scrollToSection = (ref) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
@@ -31,15 +47,19 @@ export default function Home() {
         <div className="flex flex-col basis-1/2">
           <img
             src={record.image_url}
-            className="rounded-lg hover:brightness-100 brightness-50 h-80 transition-all"
+            className="rounded-lg hover:brightness-100 hover:scale-105 brightness-50 h-80 transition-all"
           />
-          <div className="flex flex-row pt-2 gap-3">
+          <div className="flex flex-row pt-3 gap-3">
             <a href={record.git_url} target="_blank">
               <FiGithub className="text-2xl hover:scale-110 hover:text-slate-400 transition-all" />
             </a>
-            <a href={record.url} target="_blank">
-              <FiExternalLink className="text-2xl hover:scale-110 hover:text-slate-400 transition-all " />
-            </a>
+            {(record.url !== "") | null ? (
+              <a href={record.url} target="_blank">
+                <FiExternalLink className="text-2xl hover:scale-110 hover:text-slate-400 transition-all " />
+              </a>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       );
@@ -77,19 +97,6 @@ export default function Home() {
     );
   };
 
-  function navigateComponents() {
-    console.log("HIiiiii");
-    if (window.location.hash === "#About") {
-      scrollToSection(aboutRef);
-    } else if (window.location.hash === "#Experience") {
-      scrollToSection(experienceRef);
-    } else if (window.location.hash === "#Work") {
-      scrollToSection(workRef);
-    } else if (window.location.hash === "#Contact") {
-      scrollToSection(contactRef);
-    }
-  }
-
   return (
     <div className="bg-black min-h-screen h-full text-white transition-all">
       <TopNavigation navigate={navigateComponents} />
@@ -101,9 +108,9 @@ export default function Home() {
           <p className="flex text-xl font-extralight pb-10">Hi, my name is</p>
           <p className="text-6xl font-semibold">Kwame Koranteng</p>
           <p className="text-6xl font-semibold text-slate-300">
-            I build innovative solutions for the web.
+            I build innovative solutions for businesses.
           </p>
-          <p className="text-base font-extralight pt-10">{`I am a Computer Engineer graduate specializing in Software Engineering, building highly performant applications that solve real-world problems and provide users with an awesome experience. I'm currently working using NextJS and Laravel!`}</p>
+          <p className="text-base font-extralight pt-10">{`I am a Computer Engineering graduate specializing in Software Engineering, building highly performant applications that solve real-world problems and provide users with an awesome experience. I'm currently working using NextJS, NodeJS and Laravel!`}</p>
         </div>
 
         {/* About Me */}
@@ -113,35 +120,47 @@ export default function Home() {
               01. About Me
             </p>
             <p className="font-extralight">
-              My name is Kwame Korantenfg Opoku. I am a Software Engineer from
+              My name is Kwame Koranteng Opoku. I am a Software Engineer from
               Accra, Ghana. I've worked using different technologies, both
               backend and frontend. I'm currently working using PHP and
               JavaScript. My goal is to build highly performant applications
               that solve real-world problems and provide users with an awesome
-              experience. You can read more about me on my LinkedIn page, or
-              Check my Github for some cool things. Here are a few technologies
-              I've been working with recently:
+              experience. You can read more about me on my{" "}
+              <a
+                href="https://www.linkedin.com/in/kwame-koranteng-opoku-362731214"
+                target="_blank"
+                className="hover:text-slate-400 hover:underline transition-all"
+              >
+                LinkedIn
+              </a>{" "}
+              page, or Check my{" "}
+              <a
+                href="https://github.com/kkopoku"
+                target="_blank"
+                className="hover:text-slate-400 hover:underline transition-all"
+              >
+                Github
+              </a>{" "}
+              for some cool things. Here are a few technologies I've been
+              working with recently:
             </p>
             <div className="flex flex-row w-full">
               <ul className="basis-1/2 font-extralight list-disc">
                 <li>NextJS</li>
-                <li>AngularJS</li>
+                <li>Angular</li>
                 <li>NodeJS</li>
                 <li>Laravel</li>
               </ul>
               <ul className="basis-1/2 font-extralight list-disc">
                 <li>Claris Filemaker</li>
-                <li>Databases (NoSql and SQL)</li>
+                <li>Databases (MySQL and MongoDB)</li>
                 <li>PhpMyadmin</li>
                 <li>Git</li>
               </ul>
             </div>
           </div>
-          <div className="w-fit h-fit lg:w-auto justify-self-center rounded-lg p-28 bg-white hover:scale-110 transition justify-center content-center items-center">
-            <img
-              src="/images/kkopoku01.png"
-              className="object-contain h-40 scale-150"
-            />
+          <div className="w-fit h-fit lg:w-auto justify-self-center rounded-lg bg-white p-1 hover:scale-110 transition justify-center content-center items-center">
+            <img src="/images/kkopoku01.png" className="h-full w-full" />
           </div>
         </div>
 
@@ -223,7 +242,7 @@ export default function Home() {
             create <br /> your next idea together!
           </p>
           <a href={`mailto:kk.opoku@outlook.com`}>
-            <button className="py-4 px-10 border-2 rounded hover:scale-110 hover:text-black hover:bg-white transition-all ">
+            <button className="py-4 px-10 border-2 rounded hover:scale-110 hover:text-black hover:bg-slate-700 transition-all font-semibold ">
               Say Hello
             </button>
           </a>
