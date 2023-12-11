@@ -5,6 +5,7 @@ import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
 
 export default function Home() {
+  
   function navigateComponents() {
     setTimeout(() => {
       if (window.location.hash === "#About") {
@@ -18,10 +19,6 @@ export default function Home() {
       }
     }, 100);
   }
-
-  useEffect(() => {
-    navigateComponents();
-  }, []);
 
   const scrollToSection = (ref) => {
     if (ref.current) {
