@@ -70,10 +70,10 @@ export default function Home() {
       <TopNavigation />
 
       {/* Scaffolding Div */}
-      <div className="flex flex-col lg:px-40 px-20 py-44 gap-28">
+      <div className="flex flex-col lg:px-40 px-20 py-44 gap-32">
         {/* introduction */}
         <div className="w-4/5">
-          <p className="flex font-extralight pb-10">Hi, my name is</p>
+          <p className="flex text-xl font-extralight pb-10">Hi, my name is</p>
           <p className="text-6xl font-semibold">Kwame Koranteng</p>
           <p className="text-6xl font-semibold text-slate-300">
             I build innovative solutions for the web.

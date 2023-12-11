@@ -6,7 +6,7 @@ const stuffBuilt = [
     description: "Enterprise Resource Planning System tailored for SMEs with features such as Finance, Inventory, Human Resource Management and Third-Party Integration to consume Inventory.",
     stacks: ["NextJS", "NodeJS", "MongoDB", "Git"],
     image_url: "/images/essentialerp/ss01.jpg",
-    git_url: "http://test.com",
+    git_url: "https://github.com/orgs/Cessation-Code/",
     url: "http://test.com",
   },
   {
