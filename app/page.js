@@ -5,16 +5,18 @@ import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
 
 export default function Home() {
-  async function navigateComponents() {
-    if (window.location.hash === "#About") {
-      scrollToSection(aboutRef);
-    } else if (window.location.hash === "#Experience") {
-      scrollToSection(experienceRef);
-    } else if (window.location.hash === "#Work") {
-      scrollToSection(workRef);
-    } else if (window.location.hash === "#Contact") {
-      scrollToSection(contactRef);
-    }
+  function navigateComponents() {
+    setTimeout(() => {
+      if (window.location.hash === "#About") {
+        scrollToSection(aboutRef);
+      } else if (window.location.hash === "#Experience") {
+        scrollToSection(experienceRef);
+      } else if (window.location.hash === "#Work") {
+        scrollToSection(workRef);
+      } else if (window.location.hash === "#Contact") {
+        scrollToSection(contactRef);
+      }
+    }, 100);
   }
 
   useEffect(() => {
