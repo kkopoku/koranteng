@@ -1,6 +1,6 @@
 export default function TopNavigation() {
     return (
-        <div className="flex flex-row w-screen h-20 bg-transparent text-white p-10">
+        <div className="flex flex-row w-screen h-32 bg-transparent text-white px-36">
             <div className="flex basis-1/3 items-center text-xl">KORANTENG</div>
             <div className="flex flex-row-reverse basis-2/3 text-sm items-center gap-5 font-thin">
                 <button className="border border-white rounded-lg p-2">Resume</button>
