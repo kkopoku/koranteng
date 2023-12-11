@@ -1,8 +1,9 @@
 "use client";
 import TopNavigation from "@/components/TopNavigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
+import Image from "next/image";
 
 export default function Home() {
   
@@ -44,7 +45,8 @@ export default function Home() {
     const ImageComp = () => {
       return (
         <div className="flex flex-col basis-1/2">
-          <img
+          <Image
+            alt=""
             src={record.image_url}
             className="rounded-lg hover:brightness-100 hover:scale-105 brightness-50 h-80 transition-all"
           />
@@ -109,7 +111,7 @@ export default function Home() {
           <p className="text-6xl font-semibold text-slate-300">
             I build innovative solutions for businesses.
           </p>
-          <p className="text-base font-extralight pt-10">{`I am a Computer Engineering graduate specializing in Software Engineering, building highly performant applications that solve real-world problems and provide users with an awesome experience. I'm currently working using NextJS, NodeJS and Laravel!`}</p>
+          <p className="text-base font-extralight pt-10">{`I am a Computer Engineering graduate specializing in Software Engineering, building highly performant applications that solve real-world problems and provide users with an awesome experience. I am currently working using NextJS, NodeJS and Laravel!`}</p>
         </div>
 
         {/* About Me */}
@@ -120,8 +122,8 @@ export default function Home() {
             </p>
             <p className="font-extralight">
               My name is Kwame Koranteng Opoku. I am a Software Engineer from
-              Accra, Ghana. I've worked using different technologies, both
-              backend and frontend. I'm currently working using PHP and
+              Accra, Ghana. I have worked using different technologies, both
+              backend and frontend. I am currently working using PHP and
               JavaScript. My goal is to build highly performant applications
               that solve real-world problems and provide users with an awesome
               experience. You can read more about me on my{" "}
@@ -140,7 +142,7 @@ export default function Home() {
               >
                 Github
               </a>{" "}
-              for some cool things. Here are a few technologies I've been
+              for some cool things. Here are a few technologies I have been
               working with recently:
             </p>
             <div className="flex flex-row w-full">
@@ -159,7 +161,7 @@ export default function Home() {
             </div>
           </div>
           <div className="w-fit h-fit lg:w-auto justify-self-center rounded-lg bg-white p-1 hover:scale-110 transition justify-center content-center items-center">
-            <img src="/images/kkopoku01.png" className="h-full w-full" />
+            <Image alt="" src="/images/kkopoku01.png" className="h-full w-full" />
           </div>
         </div>
 
@@ -170,7 +172,7 @@ export default function Home() {
         >
           <div className="flex-col w-3/4">
             <p className="text-2xl text-slate-300 font-semibold pb-2">
-              02. Where I've Worked
+              02. Where I have Worked
             </p>
 
             <div className="flex flex-row gap-8">
@@ -219,10 +221,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Some Things I've built */}
+        {/* Some Things I have built */}
         <div ref={workRef} className="flex flex-col lg:pr-20 gap-5">
           <div className="flex flex-row text-2xl text-slate-300 font-semibold">
-            03. Some Things I've Built
+            03. Some Things I have Built
           </div>
           {stuffBuilt.map((instance) => (
             <StuffBuiltComponent record={instance} key={instance.image_url} />
@@ -234,7 +236,7 @@ export default function Home() {
           ref={contactRef}
           className="flex flex-col items-center text-center text-slate-200 gap-5"
         >
-          <p className="font-light">04. What's Next?</p>
+          <p className="font-light">04. What is Next?</p>
           <p className="font-semibold text-5xl">Get In Touch</p>
           <p>
             My inbox is always open. Whether you have a question or just want to
