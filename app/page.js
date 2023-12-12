@@ -62,7 +62,7 @@ export default function Home() {
           <img
             alt=""
             src={record.image_url}
-            className="rounded-lg hover:brightness-100 hover:scale-105 brightness-50 h-80 transition-all"
+            className="rounded-lg hover:brightness-100 hover:scale-105 brightness-50 h-52 lg:h-80 transition-all"
           />
           <div className="flex flex-row pt-3 gap-3">
             <a href={record.git_url} target="_blank">
@@ -171,13 +171,13 @@ export default function Home() {
               working with recently:
             </p>
             <div className="flex flex-row w-full">
-              <ul className="basis-1/2 font-extralight list-disc">
+              <ul className="text-base basis-1/2 font-extralight list-disc">
                 <li>NextJS</li>
                 <li>Angular</li>
                 <li>NodeJS</li>
                 <li>Laravel</li>
               </ul>
-              <ul className="basis-1/2 font-extralight list-disc">
+              <ul className="text-base basis-1/2 font-extralight list-disc">
                 <li>Claris Filemaker</li>
                 <li>Databases (MySQL and MongoDB)</li>
                 <li>PhpMyadmin</li>
@@ -185,7 +185,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="xl:col-span-1 lg:w-auto rounded-lg bg-white p-1 hover:scale-110 transition">
+          <div className="xl:col-span-1 h-60 w-fit lg:h-auto lg:w-auto rounded-lg bg-white p-1 hover:scale-110 transition justify-self-center">
             <img alt="" src="/images/kkopoku01.png" className="h-full w-fit" />
           </div>
         </div>
