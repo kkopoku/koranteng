@@ -1,11 +1,10 @@
 "use client";
 import TopNavigation from "@/components/TopNavigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
 
 export default function Home() {
-  
   function navigateComponents() {
     setTimeout(() => {
       if (window.location.hash === "#About") {
@@ -34,6 +33,22 @@ export default function Home() {
   const { jobs, stuffBuilt } = { ...data };
 
   const [selectedJob, setSelectedJob] = useState(jobs[0]);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [mobile, setMobile] = useState("");
+
+  useEffect(() => {
+    isMobile();
+    window.addEventListener("resize", isMobile);
+    return () => {
+      window.removeEventListener("resize", isMobile);
+    };
+  }, []);
+
+  function isMobile() {
+    let result = window.innerWidth < 1024;
+    setMobile(result);
+  }
+
   function selectJob(job) {
     if (job == 0) setSelectedJob(jobs[0]);
     if (job == 1) setSelectedJob(jobs[1]);
@@ -79,9 +94,9 @@ export default function Home() {
           <div className="bg-slate-900 p-5 rounded shadow-lg font-extralight text-sm">
             {record.description}
           </div>
-          <div className="flex flex-row justify-around font-extralight">
+          <div className="flex flex-row justify-around font-extralight text-sm lg:text-base">
             {record.stacks.map((stack) => (
-              <div key={stack}>{stack}</div>
+              <div key={stack}>{stack} | </div>
             ))}
           </div>
         </div>
@@ -89,12 +104,21 @@ export default function Home() {
     };
 
     // Actual component rendering here!
-    return (
-      <div className="flex flex-row w-full pb-28">
-        {record.display == "normal" ? <ImageComp /> : <DescriptionComp />}
-        {record.display == "normal" ? <DescriptionComp /> : <ImageComp />}
-      </div>
-    );
+    if (mobile) {
+      return (
+        <div className="grid lg:grid-cols-2 grid-cols-1 w-full pb-28">
+          <ImageComp />
+          <DescriptionComp />
+        </div>
+      );
+    } else {
+      return (
+        <div className="grid lg:grid-cols-2 grid-cols-1 w-full pb-28">
+          {record.display == "normal" ? <ImageComp /> : <DescriptionComp />}
+          {record.display == "normal" ? <DescriptionComp /> : <ImageComp />}
+        </div>
+      );
+    }
   };
 
   return (
@@ -102,20 +126,22 @@ export default function Home() {
       <TopNavigation navigate={navigateComponents} />
 
       {/* Scaffolding Div */}
-      <div className="flex flex-col lg:px-40 px-20 py-44 gap-32">
+      <div className="flex flex-col lg:px-40 px-10 py-44 gap-32">
         {/* introduction */}
-        <div className="w-4/5">
-          <p className="flex text-xl font-extralight pb-10">Hi, my name is</p>
-          <p className="text-6xl font-semibold">Kwame Koranteng</p>
-          <p className="text-6xl font-semibold text-slate-300">
+        <div className="lg:w-4/5">
+          <p className="flex lg:text-xl font-extralight pb-3 lg:pb-10">
+            Hi, my name is
+          </p>
+          <p className="text-3xl lg:text-6xl font-semibold">Kwame Koranteng</p>
+          <p className="text-3xl lg:text-6xl font-semibold text-slate-300">
             I build innovative solutions for businesses.
           </p>
           <p className="text-base font-extralight pt-10">{`I am a Computer Engineering graduate specializing in Software Engineering, building highly performant applications that solve real-world problems and provide users with an awesome experience. I am currently working using NextJS, NodeJS and Laravel!`}</p>
         </div>
 
         {/* About Me */}
-        <div ref={aboutRef} className="grid lg:grid-cols-3 grid-cols-1 gap-10">
-          <div className="col-span-2 flex flex-col gap-4">
+        <div ref={aboutRef} className="grid xl:grid-cols-3 grid-cols-1 gap-10">
+          <div className="xl:col-span-2 flex flex-col gap-4">
             <p className="text-2xl text-slate-300 font-semibold">
               01. About Me
             </p>
@@ -159,8 +185,8 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="w-fit h-fit lg:w-auto justify-self-center rounded-lg bg-white p-1 hover:scale-110 transition justify-center content-center items-center">
-            <img alt="" src="/images/kkopoku01.png" className="h-full w-full" />
+          <div className="xl:col-span-1 lg:w-auto rounded-lg bg-white p-1 hover:scale-110 transition">
+            <img alt="" src="/images/kkopoku01.png" className="h-full w-fit" />
           </div>
         </div>
 
@@ -169,8 +195,8 @@ export default function Home() {
           ref={experienceRef}
           className="flex flex-row-reverse lg:pr-24 gap-10"
         >
-          <div className="flex-col w-3/4">
-            <p className="text-2xl text-slate-300 font-semibold pb-2">
+          <div className="flex-col lg:w-3/4">
+            <p className="lg:text-2xl text-slate-300 font-semibold pb-2">
               02. Where I have Worked
             </p>
 
@@ -180,7 +206,7 @@ export default function Home() {
                   {jobs.map((job) => (
                     <button
                       onClick={() => selectJob(job.id)}
-                      className="hover:bg-slate-300 focus:bg-slate-300 focus:bg-opacity-25 hover:bg-opacity-25 w-full text-start text-lg px-1 py-3"
+                      className="hover:bg-slate-300 focus:bg-slate-300 focus:bg-opacity-25 hover:bg-opacity-25 w-full text-start lg:text-lg px-1 py-3"
                       key={job.id}
                     >
                       {job.companyName}
@@ -189,7 +215,7 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="flex flex-col basis-2/3 gap-4 h-96">
+              <div className="flex flex-col basis-2/3 gap-4 lg:h-96">
                 {/* Detialed Job View Here */}
                 <div className="flex flex-row text-2xl font-semibold">
                   <p>{selectedJob.role}</p>

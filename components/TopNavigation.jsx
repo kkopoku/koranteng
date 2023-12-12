@@ -1,16 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LuMenuSquare } from "react-icons/lu";
 
-export default function TopNavigation({ navigate }) {
+export default function TopNavigation({ navigate, openMobileMenu }) {
   useEffect(() => {
+    isMobile();
     window.addEventListener("resize", isMobile);
     return () => {
-        window.removeEventListener("resize", isMobile);
+      window.removeEventListener("resize", isMobile);
     };
   }, []);
 
-  const [mobile, setMobile] = useState(true);
+  const [mobile, setMobile] = useState("");
 
   const buttons = [
     {
@@ -46,7 +48,7 @@ export default function TopNavigation({ navigate }) {
     "hover:scale-105 transition-all rounded-lg p-2 font-normal";
 
   function isMobile() {
-    let result = window.innerWidth < 768;
+    let result = window.innerWidth < 1024;
     setMobile(result);
   }
 
@@ -61,7 +63,7 @@ export default function TopNavigation({ navigate }) {
 
   const router = useRouter();
   return (
-    <div className="fixed flex flex-row w-screen h-32 bg-black bg-opacity-70 text-white px-36 z-50">
+    <div className="fixed flex flex-row w-screen h-32 bg-black bg-opacity-70 text-white px-10 lg:px-36 z-50">
       <button
         onClick={() => router.replace("/")}
         className="flex basis-1/3 items-center font-semibold text-2xl"
@@ -69,20 +71,26 @@ export default function TopNavigation({ navigate }) {
         KORANTENG
       </button>
 
-      {window.innerWidth > 768 ? (
+      {mobile !== "" && (
         <div className="flex flex-row-reverse basis-2/3 text-sm items-center gap-5 font-thin">
-          {buttons.map((button) => (
-            <button
-              key={button.name}
-              onClick={() => handleNavigation(button)}
-              className={button.hash === "" ? buttonSytle : buttonListStyle}
-            >
-              {button.name}
+          {!mobile ? (
+            <>
+              {buttons.map((button) => (
+                <button
+                  key={button.name}
+                  onClick={() => handleNavigation(button)}
+                  className={button.hash === "" ? buttonSytle : buttonListStyle}
+                >
+                  {button.name}
+                </button>
+              ))}
+            </>
+          ) : (
+            <button onClick={() => openMobileMenu}>
+              <LuMenuSquare className="text-3xl" />
             </button>
-          ))}
+          )}
         </div>
-      ) : (
-        <div>something</div>
       )}
     </div>
   );
