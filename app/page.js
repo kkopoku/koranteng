@@ -184,7 +184,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="xl:col-span-1 h-60 w-fit lg:h-auto lg:w-auto rounded-lg bg-white p-1 hover:scale-110 transition justify-self-center">
+          <div className="xl:col-span-1 w-60 lg:h-auto lg:w-auto rounded-lg bg-white p-1 hover:scale-110 transition justify-self-center">
             <img alt="" src="/images/kkopoku01.png" className="h-full w-fit" />
           </div>
         </div>

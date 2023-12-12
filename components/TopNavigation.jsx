@@ -68,7 +68,7 @@ export default function TopNavigation({ navigate }) {
   //   COMPONENTS
   const MobileMenuComponent = () => {
     return (
-      <div className="flex fixed inset-0 z-40 flex-col bg-black bg-opacity-60 items-center justify-center">
+      <div onClick={()=>setIsMobileMenuOpen(false)} className="flex fixed inset-0 z-40 flex-col bg-black bg-opacity-90 items-center justify-center">
         {buttons.map((button) => (
           <button
             key={button.name}
