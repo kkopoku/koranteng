@@ -1,32 +1,81 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 
-export default function TopNavigation({navigate}) {
-    const router = useRouter();
-    return (
-        <div className="fixed flex flex-row w-screen h-32 bg-black bg-opacity-70 text-white px-36 z-50">
-            <button onClick={()=>router.replace('/')} className="flex basis-1/3 items-center font-semibold text-2xl">KORANTENG</button>
-            <div className="flex flex-row-reverse basis-2/3 text-sm items-center gap-5 font-thin">
-                <button onClick={()=>{
-                    router.replace('/resume')
-                    }} className="hover:scale-105 hover:border-slate-500 border-2 transition-all border-white rounded-lg p-2 font-normal">Resume</button>
-                <button onClick={()=>{
-                    window.location.hash = "#Contact"
-                    navigate();
-                    }} className="hover:scale-105 hover:text-slate-500 font-normal transition-all">04. Contact</button>
-                <button onClick={()=>{
-                    window.location.hash = "#Work"
-                    navigate();
-                    }} className="hover:scale-105 hover:text-slate-500 font-normal transition-all">03. Work</button>
-                <button onClick={()=>{
-                    window.location.hash = "#Experience"
-                    navigate();
-                    }} className="hover:scale-105 hover:text-slate-500 font-normal transition-all">02. Experience</button>
-                <button onClick={()=>{
-                    window.location.hash = "#About"
-                    navigate();
-                    }} className="hover:scale-105 hover:text-slate-500 font-normal transition-all">01. About</button>
-            </div>
+export default function TopNavigation({ navigate }) {
+  const buttons = [
+    {
+        name: "Resume",
+        route: "/resume",
+        hash: "",
+      },
+    {
+      name: "04. Contact",
+      route: "",
+      hash: "#Contact",
+    },
+    {
+      name: "03. Work",
+      route: "",
+      hash: "#Work",
+    },
+    {
+      name: "02. Experience",
+      route: "",
+      hash: "#Experience",
+    },
+    {
+      name: "01. About",
+      route: "",
+      hash: "#About",
+    }
+  ];
+
+  const buttonSytle =
+    "hover:scale-105 hover:border-slate-500 border-2 transition-all border-white rounded-lg p-2 font-normal";
+  const buttonListStyle =
+    "hover:scale-105 transition-all rounded-lg p-2 font-normal";
+
+  function isMobile() {
+    console.log(isMobile());
+    return window.innerWidth < 768;
+  }
+
+  function handleNavigation(button){
+    if (button.hash === ""){
+        router.replace(button.route);
+    } else {
+        window.location.hash = button.hash;
+        navigate();
+    }
+  }
+
+  const router = useRouter();
+  return (
+    <div className="fixed flex flex-row w-screen h-32 bg-black bg-opacity-70 text-white px-36 z-50">
+      <button
+        onClick={() => router.replace("/")}
+        className="flex basis-1/3 items-center font-semibold text-2xl"
+      >
+        KORANTENG
+      </button>
+
+      {isMobile ? (
+        <div className="flex flex-row-reverse basis-2/3 text-sm items-center gap-5 font-thin">
+          {buttons.map((button) => (
+            <>
+              <button
+                key={button.name}
+                onClick={() => handleNavigation(button)}
+                className={button.hash === "" ? buttonSytle : buttonListStyle}
+              >
+                {button.name}
+              </button>
+            </>
+          ))}
         </div>
-    )
+      ) : (
+        <>something</>
+      )}
+    </div>
+  );
 }

@@ -3,7 +3,6 @@ import TopNavigation from "@/components/TopNavigation";
 import { useState, useRef } from "react";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import data from "./data";
-import Image from "next/image";
 
 export default function Home() {
   
@@ -45,7 +44,7 @@ export default function Home() {
     const ImageComp = () => {
       return (
         <div className="flex flex-col basis-1/2">
-          <Image
+          <img
             alt=""
             src={record.image_url}
             className="rounded-lg hover:brightness-100 hover:scale-105 brightness-50 h-80 transition-all"
@@ -161,7 +160,7 @@ export default function Home() {
             </div>
           </div>
           <div className="w-fit h-fit lg:w-auto justify-self-center rounded-lg bg-white p-1 hover:scale-110 transition justify-center content-center items-center">
-            <Image alt="" src="/images/kkopoku01.png" className="h-full w-full" />
+            <img alt="" src="/images/kkopoku01.png" className="h-full w-full" />
           </div>
         </div>
 
