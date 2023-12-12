@@ -33,7 +33,6 @@ export default function Home() {
   const { jobs, stuffBuilt } = { ...data };
 
   const [selectedJob, setSelectedJob] = useState(jobs[0]);
-  const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [mobile, setMobile] = useState("");
 
   useEffect(() => {
@@ -186,7 +185,7 @@ export default function Home() {
             </div>
           </div>
           <div className="xl:col-span-1 h-60 w-fit lg:h-auto lg:w-auto rounded-lg bg-white p-1 hover:scale-110 transition justify-self-center">
-            <img alt="" src="/images/kkopoku01.png" className="h-full w-full" />
+            <img alt="" src="/images/kkopoku01.png" className="h-full w-fit" />
           </div>
         </div>
 

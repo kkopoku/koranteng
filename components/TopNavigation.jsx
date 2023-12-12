@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LuMenuSquare } from "react-icons/lu";
 
-export default function TopNavigation({ navigate, openMobileMenu }) {
+export default function TopNavigation({ navigate }) {
   useEffect(() => {
     isMobile();
     window.addEventListener("resize", isMobile);
@@ -13,6 +13,7 @@ export default function TopNavigation({ navigate, openMobileMenu }) {
   }, []);
 
   const [mobile, setMobile] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const buttons = [
     {
@@ -54,6 +55,7 @@ export default function TopNavigation({ navigate, openMobileMenu }) {
 
   function handleNavigation(button) {
     if (button.hash === "") {
+      if (mobile === true ) return window.open('https://drive.google.com/file/d/1yBuqKKIfEAbgLFiCMlcr3r1bTpqMrCvN/view?usp=sharing', '_blank');
       router.replace(button.route);
     } else {
       window.location.hash = button.hash;
@@ -62,6 +64,29 @@ export default function TopNavigation({ navigate, openMobileMenu }) {
   }
 
   const router = useRouter();
+
+  //   COMPONENTS
+  const MobileMenuComponent = () => {
+    return (
+      <div className="flex fixed inset-0 z-40 flex-col bg-black bg-opacity-60 items-center justify-center">
+        {buttons.map((button) => (
+          <button
+            key={button.name}
+            onClick={() => 
+                {
+                    handleNavigation(button);
+                    setIsMobileMenuOpen(false);
+                }
+            }
+            className={button.hash === "" ? buttonSytle : buttonListStyle}
+          >
+            {button.name}
+          </button>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className="fixed flex flex-row w-screen h-32 bg-black bg-opacity-70 text-white px-10 lg:px-36 z-50">
       <button
@@ -86,12 +111,13 @@ export default function TopNavigation({ navigate, openMobileMenu }) {
               ))}
             </>
           ) : (
-            <button onClick={() => openMobileMenu}>
+            <button onClick={() => setIsMobileMenuOpen(true)}>
               <LuMenuSquare className="text-3xl" />
             </button>
           )}
         </div>
       )}
+      {isMobileMenuOpen && <MobileMenuComponent />}
     </div>
   );
 }
