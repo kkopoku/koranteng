@@ -1,13 +1,23 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function TopNavigation({ navigate }) {
+  useEffect(() => {
+    window.addEventListener("resize", isMobile);
+    return () => {
+        window.removeEventListener("resize", isMobile);
+    };
+  }, []);
+
+  const [mobile, setMobile] = useState(true);
+
   const buttons = [
     {
-        name: "Resume",
-        route: "/resume",
-        hash: "",
-      },
+      name: "Resume",
+      route: "/resume",
+      hash: "",
+    },
     {
       name: "04. Contact",
       route: "",
@@ -27,7 +37,7 @@ export default function TopNavigation({ navigate }) {
       name: "01. About",
       route: "",
       hash: "#About",
-    }
+    },
   ];
 
   const buttonSytle =
@@ -36,16 +46,16 @@ export default function TopNavigation({ navigate }) {
     "hover:scale-105 transition-all rounded-lg p-2 font-normal";
 
   function isMobile() {
-    console.log(isMobile());
-    return window.innerWidth < 768;
+    let result = window.innerWidth < 768;
+    setMobile(result);
   }
 
-  function handleNavigation(button){
-    if (button.hash === ""){
-        router.replace(button.route);
+  function handleNavigation(button) {
+    if (button.hash === "") {
+      router.replace(button.route);
     } else {
-        window.location.hash = button.hash;
-        navigate();
+      window.location.hash = button.hash;
+      navigate();
     }
   }
 
@@ -59,22 +69,20 @@ export default function TopNavigation({ navigate }) {
         KORANTENG
       </button>
 
-      {isMobile ? (
+      {window.innerWidth > 768 ? (
         <div className="flex flex-row-reverse basis-2/3 text-sm items-center gap-5 font-thin">
           {buttons.map((button) => (
-            <>
-              <button
-                key={button.name}
-                onClick={() => handleNavigation(button)}
-                className={button.hash === "" ? buttonSytle : buttonListStyle}
-              >
-                {button.name}
-              </button>
-            </>
+            <button
+              key={button.name}
+              onClick={() => handleNavigation(button)}
+              className={button.hash === "" ? buttonSytle : buttonListStyle}
+            >
+              {button.name}
+            </button>
           ))}
         </div>
       ) : (
-        <>something</>
+        <div>something</div>
       )}
     </div>
   );
