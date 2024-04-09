@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LuMenuSquare } from "react-icons/lu";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function TopNavigation({ navigate }) {
   useEffect(() => {
@@ -88,10 +89,10 @@ export default function TopNavigation({ navigate }) {
   };
 
   return (
-    <div className="fixed flex flex-row w-screen h-32 bg-black bg-opacity-70 text-white px-10 lg:px-36 z-50">
+    <div className="fixed flex flex-row w-screen py-5 bg-black text-white px-3 lg:px-36 z-50">
       <button
         onClick={() => router.replace("/")}
-        className="flex basis-1/3 items-center font-semibold text-2xl"
+        className="flex basis-1/3 items-center text-base"
       >
         KORANTENG
       </button>
@@ -112,7 +113,7 @@ export default function TopNavigation({ navigate }) {
             </>
           ) : (
             <button onClick={() => setIsMobileMenuOpen(true)}>
-              <LuMenuSquare className="text-3xl" />
+              <RxHamburgerMenu className="text-xl border rounded-full p-1" />
             </button>
           )}
         </div>
