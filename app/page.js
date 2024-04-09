@@ -125,7 +125,7 @@ export default function Home() {
       <TopNavigation navigate={navigateComponents} />
 
       {/* Scaffolding Div */}
-      <div className="flex flex-col lg:px-40 px-10 py-44 gap-32">
+      <div className="flex flex-col lg:px-40 px-4 py-28 gap-32">
         {/* introduction */}
         <div className="lg:w-4/5">
           <p className="flex lg:text-xl font-extralight pb-3 lg:pb-10">
