@@ -215,7 +215,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col basis-2/3 gap-4 lg:h-96">
-                {/* Detialed Job View Here */}
+                {/* Detailed Job View Here */}
                 <div className="flex flex-row text-2xl font-semibold">
                   <p>{selectedJob.role}</p>
                   <a

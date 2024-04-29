@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LuMenuSquare } from "react-icons/lu";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { motion } from "framer-motion"
 
 export default function TopNavigation({ navigate }) {
   useEffect(() => {
@@ -44,10 +44,15 @@ export default function TopNavigation({ navigate }) {
     },
   ];
 
+  const buttonVariants = {
+    open: {opacity: 1, y: 0, transition: {type: "spring", stiffness: 300, damping: 24} },
+    closed: {opacity: 0, y: 20, transition: {duration: 0.2 } }
+  }
+
   const buttonSytle =
     "hover:scale-105 hover:border-slate-500 border-2 transition-all border-white rounded-lg p-2 font-normal";
   const buttonListStyle =
-    "hover:scale-105 transition-all rounded-lg p-2 font-normal";
+    "hover:scale-105 transition-all rounded-lg font-normal";
 
   function isMobile() {
     let result = window.innerWidth < 1024;
@@ -69,9 +74,10 @@ export default function TopNavigation({ navigate }) {
   //   COMPONENTS
   const MobileMenuComponent = () => {
     return (
-      <div onClick={()=>setIsMobileMenuOpen(false)} className="flex fixed inset-0 z-40 flex-col bg-black bg-opacity-90 items-center justify-center">
+      <motion.div initial={{x: -500}}  animate={{x: 0}} transition={{duration: 0.6}} 
+      onClick={()=>setIsMobileMenuOpen(false)} className="flex fixed inset-0 z-40 flex-col-reverse bg-black bg-opacity-90 items-center justify-center gap-7">
         {buttons.map((button) => (
-          <button
+          <motion.button variants={buttonVariants} initial={{x:10}} animate="open" 
             key={button.name}
             onClick={() => 
                 {
@@ -82,9 +88,9 @@ export default function TopNavigation({ navigate }) {
             className={button.hash === "" ? buttonSytle : buttonListStyle}
           >
             {button.name}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
     );
   };
 
