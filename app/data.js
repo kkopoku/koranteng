@@ -38,7 +38,7 @@ const data = {
   jobs: [
     {
       id: 0,
-      companyName: "Afirca Software Solutions",
+      companyName: "Africa Software Solutions",
       duties: [
         "Developing custom application to meet business needs with Claris FileMaker and Angular",
         "Communicating with clients to gather requirements to provide optimal solutions",
